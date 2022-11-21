@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    {% block content %}
+    <form method="POST" class="form-card" enctype="multipart/form-data" action="{% url 'deliveries' %}">
+ 
+        <!-- Security token -->
+        {% csrf_token %}
+        <div class="form-fields">
+        <!-- Using the formset -->
+        {% for field in form %}
+        {% if field.name == 'name' %}
+            <div class="form-group">
+                {{ form.name.errors }} 
+                <label class="control-label">Name</label>
+                <div>
+                    {{ form.name }} 
+                </div>
+            </div>
+        {% elif field.name == 'total' %}
+            <div class="form-group">
+                {{ form.total.errors }} 
+                <label class="control-label">total</label>
+                <div>
+                    {{ form.total }} 
+                </div>
+            </div>
+        {% elif field.name == 'status' %}
+            <div class="form-group">
+                {{ form.status.errors }} 
+                <label class="control-label">status</label>
+                <div>
+                    {{ form.status }} 
+                </div>
+            </div>
+        {% elif field.name == 'courier' %}
+            <div class="form-group">
+                {{ form.courier.errors }} 
+                <label class="control-label">Entrega</label>
+                <div>
+                    {{ form.courier }} 
+                </div>
+            </div>
+        {% endif %}
+
+    {% endfor %}
+    </div>       
+        <input type="submit" value="Submit">
+    </form>
+   {% endblock %}
+</body>
+</html>

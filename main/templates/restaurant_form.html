@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    {% block content %}
+    <form method="POST" class="form-card" enctype="multipart/form-data" action="{% url 'restaurants' %}">
+ 
+        <!-- Security token -->
+        {% csrf_token %}
+        <div class="form-fields">
+        <!-- Using the formset -->
+        {% for field in form %}
+        {% if field.name == 'name' %}
+            <div class="form-group">
+                {{ form.name.errors }} 
+                <label class="control-label">Name</label>
+                <div>
+                    {{ form.name }} 
+                </div>
+            </div>
+        {% elif field.name == 'cnpj' %}
+            <div class="form-group">
+                {{ form.cnpj.errors }} 
+                <label class="control-label">cnpj</label>
+                <div>
+                    {{ form.cnpj }} 
+                </div>
+            </div>
+        {% elif field.name == 'email' %}
+            <div class="form-group">
+                {{ form.email.errors }} 
+                <label class="control-label">Email</label>
+                <div>
+                    {{ form.email }} 
+                </div>
+            </div>
+        {% elif field.name == 'active' %}
+            <div class="form-group">
+                {{ form.active.errors }} 
+                <label class="control-label">Ativo?</label>
+                <div>
+                    {{ form.active }} 
+                </div>
+            </div>
+        {% elif field.name == 'delivery' %}
+            <div class="form-group">
+                {{ form.delivery.errors }} 
+                <label class="control-label">Entrega</label>
+                <div>
+                    {{ form.delivery }} 
+                </div>
+            </div>
+        {% endif %}
+
+    {% endfor %}
+    </div>       
+        <input type="submit" value="Submit">
+    </form>
+   {% endblock %}
+</body>
+</html>
